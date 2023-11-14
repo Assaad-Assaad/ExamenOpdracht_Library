@@ -1,0 +1,65 @@
+﻿CREATE TABLE [dbo].[Books](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Isbn] [nvarchar](50) NOT NULL,
+	[Title] [nvarchar](50) NOT NULL,
+	[Author] [nvarchar](50) NOT NULL,
+	[BuyingPrice] [decimal](18, 2) NOT NULL,
+	[RentingPrice] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_Books] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+CREATE TABLE [dbo].[Events](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[EventName] [nvarchar](250) NOT NULL,
+	[DateAndTime] [datetime] NOT NULL,
+ CONSTRAINT [PK_Events] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+
+CREATE TABLE [dbo].[Members](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[Age] [tinyint] NOT NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Members] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+
+CREATE TABLE [dbo].[Members_Events](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Member_Id] [bigint] NOT NULL,
+	[Event_Id] [bigint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Members_Events]  WITH CHECK ADD FOREIGN KEY([Event_Id])
+REFERENCES [dbo].[Events] ([Id])
+GO
+
+ALTER TABLE [dbo].[Members_Events]  WITH CHECK ADD FOREIGN KEY([Member_Id])
+REFERENCES [dbo].[Members] ([Id])
+GO
