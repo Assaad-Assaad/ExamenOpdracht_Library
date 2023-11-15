@@ -19,8 +19,7 @@ namespace ExamenOpdracht_Library.Repositories
 
         public bool SignForEvent(long memberId, long eventId)
         {
-            using (connection)
-            {
+            
                 var existingRegistration = connection.QuerySingleOrDefault<long>(
                     "SELECT Id FROM Members_Events WHERE Event_Id = @EventId AND Member_Id = @MemberId",
                     new { EventId = eventId, MemberId = memberId });
@@ -38,7 +37,7 @@ namespace ExamenOpdracht_Library.Repositories
 
                     return rowsAffected > 0;
                 }
-            }
+            
         }
     }
 }

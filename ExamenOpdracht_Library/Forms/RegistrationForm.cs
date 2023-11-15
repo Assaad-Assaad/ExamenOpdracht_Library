@@ -40,6 +40,7 @@ namespace ExamenOpdracht_Library.Forms
                 string email = TxtEmail.Text;
                 string password = TxtPassword.Text;
 
+
                 var newMember = new Member
                 {
                     FirstName = firstName,

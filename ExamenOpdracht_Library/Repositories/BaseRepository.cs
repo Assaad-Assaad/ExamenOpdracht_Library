@@ -20,6 +20,7 @@ namespace ExamenOpdracht_Library.Repositories
         public BaseRepository(string connectionString)
         {
             this.connectionString = connectionString;
+            
             connection = new SqlConnection(connectionString);
             connection.Open();
         }
@@ -29,10 +30,10 @@ namespace ExamenOpdracht_Library.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            using (connection)
-            {
+            
+            
                 return connection.Query<TEntity>($"SELECT * FROM {Table}");
-            }
+            
             
         }
         
